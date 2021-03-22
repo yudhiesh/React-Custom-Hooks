@@ -1,6 +1,7 @@
 import React from "react";
 
-const context = React.createContext();
+const storeContext = React.createContext();
+const dispatchContext = React.createContext();
 
 export const StoreProvider = ({ children, reducer, initialState = {} }) => {
   const [store, dispatch] = React.useReducer(reducer, initialState);
@@ -10,9 +11,17 @@ export const StoreProvider = ({ children, reducer, initialState = {} }) => {
     dispatch,
   ]);
 
-  return <context.Provider value={contextValue}>{children}</context.Provider>;
+  return (
+    <dispatchContext.Provider value={dispatch}>
+      <storeContext.Provider value={store}>{children}</storeContext.Provider>
+    </dispatchContext.Provider>
+  );
 };
 
 export default function useStore() {
-  return React.useContext(context);
+  return React.useContext(storeContext);
+}
+
+export default function useDispatch() {
+  return React.useContext(dispatchContext);
 }

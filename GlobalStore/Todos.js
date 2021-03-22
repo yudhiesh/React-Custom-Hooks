@@ -1,7 +1,9 @@
+import useDispatch from "./StoreProvider";
 import useStore from "./StoreProvider";
 
 export default function Todos() {
-  const [{ todos }, dispatch] = useStore();
+  const dispatch = useDispatch();
+  const { todos } = useStore();
 
   const addTodo = () =>
     dispatch({
