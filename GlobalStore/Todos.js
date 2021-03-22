@@ -1,6 +1,4 @@
-import useDispatch from "./StoreProvider";
-import useStore from "./StoreProvider";
-
+import Todo from "./Todo";
 export default function Todos() {
   const dispatch = useDispatch();
   const { todos } = useStore();
@@ -16,7 +14,7 @@ export default function Todos() {
   return (
     <div>
       {todos.map((todo) => {
-        <div>{todo}</div>;
+        <Todo todo={todo} />;
       })}
     </div>
   );
