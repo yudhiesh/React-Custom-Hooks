@@ -1,13 +1,21 @@
 import useStore from "./StoreProvider";
 
 export default function Todos() {
-  const [{ todos }, setStore] = useStore();
+  const [{ todos }, dispatch] = useStore();
 
-  const addTodos = () => {
-    setStore((old) => ({
-      ...old,
-      todos: [...old.todos, { name: "New Todo" }],
-    }));
-  };
-  return <div>{todos}</div>;
+  const addTodo = () =>
+    dispatch({
+      type: "addTodo",
+      todo: {
+        name: "New Todo",
+      },
+    });
+
+  return (
+    <div>
+      {todos.map((todo) => {
+        <div>{todo}</div>;
+      })}
+    </div>
+  );
 }
